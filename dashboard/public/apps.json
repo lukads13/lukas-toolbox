@@ -1,0 +1,29 @@
+[
+  {
+    "id": "toolbox",
+    "name": "Toolbox",
+    "description": "Dieses Dashboard: alle Apps an einem Ort und Tickets an Claude.",
+    "icon": "🧰",
+    "url": "/",
+    "repo": "https://github.com/lukads13/lukas-toolbox",
+    "status": "live"
+  },
+  {
+    "id": "vocab",
+    "name": "Vocab",
+    "description": "Vokabel-App.",
+    "icon": "📚",
+    "url": "",
+    "repo": "https://github.com/lukads13/vocab",
+    "status": "in Arbeit"
+  },
+  {
+    "id": "lukas-fit",
+    "name": "Lukas Fit",
+    "description": "Fitness-App.",
+    "icon": "💪",
+    "url": "",
+    "repo": "https://github.com/lukads13/lukas-fit-releases",
+    "status": "in Arbeit"
+  }
+]

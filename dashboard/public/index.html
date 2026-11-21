@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toolbox</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🧰 Toolbox</h1>
+    <span id="me" class="muted"></span>
+  </header>
+
+  <main>
+    <section>
+      <h2>Meine Apps</h2>
+      <div id="apps" class="grid"></div>
+    </section>
+
+    <section>
+      <h2>Neues Ticket</h2>
+      <form id="ticket-form" class="card">
+        <label>Was soll passieren?
+          <input name="title" required maxlength="200" placeholder="z. B. Dark Mode in Vocab einbauen">
+        </label>
+        <label>Für welche App?
+          <select name="app" id="app-select"><option value="">Keine bestimmte</option></select>
+        </label>
+        <label>Details (optional)
+          <textarea name="details" rows="4" maxlength="10000" placeholder="Beschreibe so genau wie möglich, was du dir wünschst."></textarea>
+        </label>
+        <button type="submit">Ticket anlegen</button>
+        <p id="form-msg" class="muted" role="status"></p>
+      </form>
+    </section>
+
+    <section>
+      <div class="row">
+        <h2>Tickets</h2>
+        <select id="filter" aria-label="Tickets filtern">
+          <option value="aktiv">Offen und in Arbeit</option>
+          <option value="alle">Alle</option>
+          <option value="erledigt">Erledigt</option>
+        </select>
+      </div>
+      <ul id="tickets" class="tickets"><li class="muted">Lade Tickets …</li></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

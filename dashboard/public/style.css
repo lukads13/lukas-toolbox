@@ -1,0 +1,56 @@
+:root {
+  --bg: #f6f7f9; --card: #ffffff; --text: #1c1f24; --muted: #69707d;
+  --border: #e2e5ea; --accent: #2f6fdf; --accent-text: #fff;
+  --open: #b25e00; --work: #2f6fdf; --done: #1f8a4c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a; --card: #1d2026; --text: #e8eaee; --muted: #9aa1ad;
+    --border: #2c3038; --accent: #5b8ff0; --accent-text: #fff;
+    --open: #f0a24b; --work: #7ea6f4; --done: #5cc58a;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+header, main { max-width: 960px; margin: 0 auto; padding: 16px; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+h1 { margin: 8px 0; font-size: 1.6rem; }
+h2 { font-size: 1.15rem; margin: 24px 0 12px; }
+.muted { color: var(--muted); font-size: .9rem; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+}
+.app .icon { font-size: 1.8rem; }
+.app h3 { margin: 6px 0 4px; font-size: 1.05rem; }
+.app p { margin: 0 0 10px; color: var(--muted); font-size: .9rem; }
+.app .links { display: flex; gap: 12px; flex-wrap: wrap; font-size: .9rem; }
+a { color: var(--accent); }
+form { display: grid; gap: 12px; }
+label { display: grid; gap: 4px; font-weight: 600; font-size: .95rem; }
+input, select, textarea, button {
+  font: inherit; padding: 10px 12px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text);
+}
+button {
+  background: var(--accent); color: var(--accent-text); border: none; font-weight: 600; cursor: pointer;
+  justify-self: start;
+}
+button:disabled { opacity: .6; cursor: wait; }
+.tickets { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.ticket { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.ticket a { font-weight: 600; text-decoration: none; }
+.badge {
+  font-size: .8rem; font-weight: 600; padding: 2px 10px; border-radius: 999px;
+  border: 1px solid currentColor; white-space: nowrap;
+}
+.badge.offen { color: var(--open); }
+.badge.in-arbeit { color: var(--work); }
+.badge.erledigt { color: var(--done); }
+.pill { font-size: .8rem; color: var(--muted); }
+#form-msg:empty { display: none; }
+.app .pill { display: block; margin-bottom: 4px; }
