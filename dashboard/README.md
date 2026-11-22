@@ -19,10 +19,10 @@ Kosten: 0 € (Workers Free, Cloudflare Access Free bis 50 Nutzer, GitHub Free).
    - Bei Cloudflare als Secret speichern: Workers → `toolbox` → *Settings → Variables and Secrets*
      → *Add* → Typ **Secret**, Name `GITHUB_TOKEN`.
 3. **Login mit Cloudflare Access** einschalten
-   - Workers → `toolbox` → *Settings → Domains & Routes* → bei `workers.dev` **Cloudflare Access** aktivieren.
-   - Unter *Zero Trust → Access → Applications* die neue App öffnen, eine Regel „Emails = meine Adresse“ setzen.
-   - Dort stehen auch **Team-Domain** (z. B. `name.cloudflareaccess.com`) und **AUD-Tag**.
-     Diese zwei Werte und die eigene E-Mail in `wrangler.jsonc` unter `vars` eintragen.
+   - Workers → `toolbox` → Tab **Access** → „Protect this Worker behind Access“,
+     Scope **All traffic**, Richtlinie **Cloudflare account** (nur Mitglieder des eigenen Kontos).
+   - Rechts unter *Application values* stehen **AUD-Tag** und die **Team-Domain** (`…cloudflareaccess.com`).
+     Diese zwei Werte in `wrangler.jsonc` unter `vars` eintragen (eingerichtet am 22.11.2026).
 
 ## Lokal ausprobieren
 

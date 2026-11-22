@@ -14,12 +14,12 @@
   "vars": {
     // Privates Repo, in dem die Tickets als GitHub Issues liegen.
     "TICKETS_REPO": "lukads13/lukas-tickets",
-    // Cloudflare Access: wird nach dem Einrichten von Access ausgefüllt.
-    // Solange das leer ist, verweigert die API jeden Zugriff (sicherer Standard).
-    "ACCESS_TEAM_DOMAIN": "",
-    "ACCESS_AUD": "",
-    // Nur diese E-Mail-Adressen dürfen Tickets sehen und anlegen (kommagetrennt).
-    "ALLOWED_EMAILS": ""
+    // Cloudflare Access (Worker → Access → Application values). Diese Werte sind
+    // nicht geheim. Wären sie leer, würde die API jeden Zugriff verweigern.
+    // Wer rein darf, regelt die Access-Richtlinie (nur Mitglieder dieses Cloudflare-Kontos).
+    // Optional: zusätzliche E-Mail-Liste als Secret ALLOWED_EMAILS (nicht hier, Repo ist öffentlich).
+    "ACCESS_TEAM_DOMAIN": "white-thunder-b690.cloudflareaccess.com",
+    "ACCESS_AUD": "3ea8067e72303bd02493a7677f52218e34d8c91f56b5d1e45705bc9944919bc9"
   },
   "observability": { "enabled": true }
 }
