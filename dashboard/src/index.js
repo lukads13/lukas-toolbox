@@ -32,7 +32,7 @@ export default {
       return json({ error: "Nicht gefunden." }, 404);
     } catch (err) {
       console.error(err);
-      return json({ error: "Interner Fehler. Details stehen im Cloudflare-Log." }, 500);
+      return json({ error: friendlyError(err) }, 500);
     }
   },
 };
@@ -99,7 +99,7 @@ async function createTicket(request, env, email) {
 }
 
 async function github(env, path, init = {}) {
-  if (!env.GITHUB_TOKEN) throw new Error("GITHUB_TOKEN ist nicht gesetzt.");
+  if (!env.GITHUB_TOKEN) throw new GitHubError(0, "GITHUB_TOKEN ist nicht gesetzt.");
   const res = await fetch(`https://api.github.com${path}`, {
     ...init,
     headers: {
@@ -111,9 +111,33 @@ async function github(env, path, init = {}) {
     },
   });
   if (!res.ok) {
-    throw new Error(`GitHub ${res.status}: ${await res.text()}`);
+    throw new GitHubError(res.status, await res.text());
   }
   return res.json();
+}
+
+class GitHubError extends Error {
+  constructor(status, detail) {
+    super(`GitHub ${status}: ${detail}`);
+    this.status = status;
+  }
+}
+
+// Verständliche Meldung für die Webseite, ohne geheime Details.
+export function friendlyError(err) {
+  if (!(err instanceof GitHubError)) return "Interner Fehler. Details stehen im Cloudflare-Log.";
+  switch (err.status) {
+    case 0:
+      return "Der GitHub-Schlüssel fehlt: Secret GITHUB_TOKEN beim Worker anlegen.";
+    case 401:
+      return "GitHub lehnt den Schlüssel ab (ungültig oder abgelaufen). Bitte neuen GITHUB_TOKEN anlegen.";
+    case 403:
+      return "Der GitHub-Schlüssel darf das nicht. Er braucht „Issues: Read and write“ für lukas-tickets.";
+    case 404:
+      return "GitHub findet das Ticket-Repo nicht. Der Schlüssel muss Zugriff auf lukas-tickets haben.";
+    default:
+      return `GitHub-Fehler ${err.status}. Details stehen im Cloudflare-Log.`;
+  }
 }
 
 // ---------- Cloudflare Access ----------
