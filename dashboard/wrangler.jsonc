@@ -1,0 +1,25 @@
+{
+  // Cloudflare Worker für das Toolbox-Dashboard.
+  // Hier stehen KEINE Geheimnisse. Der GitHub-Schlüssel wird nur mit
+  // `npx wrangler secret put GITHUB_TOKEN` bei Cloudflare hinterlegt.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "toolbox",
+  "main": "src/index.js",
+  "compatibility_date": "2025-11-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    // Privates Repo, in dem die Tickets als GitHub Issues liegen.
+    "TICKETS_REPO": "lukads13/lukas-tickets",
+    // Cloudflare Access: wird nach dem Einrichten von Access ausgefüllt.
+    // Solange das leer ist, verweigert die API jeden Zugriff (sicherer Standard).
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": "",
+    // Nur diese E-Mail-Adressen dürfen Tickets sehen und anlegen (kommagetrennt).
+    "ALLOWED_EMAILS": ""
+  },
+  "observability": { "enabled": true }
+}

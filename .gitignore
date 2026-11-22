@@ -32,3 +32,8 @@ __pycache__/
 .venv/
 venv/
 *.log
+
+# --- Cloudflare / Wrangler (local secrets and state) ---
+.dev.vars
+.dev.vars.*
+.wrangler/
