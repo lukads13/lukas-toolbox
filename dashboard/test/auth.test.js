@@ -61,6 +61,11 @@ test("fremde E-Mail: gesperrt", async () => {
   assert.equal(await authenticate(req(await makeToken({ ...good(), email: "fremd@example.com" })), env), null);
 });
 
-test("keine erlaubten E-Mails eingetragen: gesperrt", async () => {
-  assert.equal(await authenticate(req(await makeToken(good())), { ...env, ALLOWED_EMAILS: "" }), null);
+test("keine E-Mail-Liste: jede von Access geprüfte Person darf rein", async () => {
+  assert.equal(await authenticate(req(await makeToken(good())), { ...env, ALLOWED_EMAILS: "" }), "ich@example.com");
+});
+
+test("Token ohne E-Mail: gesperrt", async () => {
+  const { email, ...noEmail } = good();
+  assert.equal(await authenticate(req(await makeToken(noEmail)), { ...env, ALLOWED_EMAILS: "" }), null);
 });

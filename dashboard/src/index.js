@@ -168,7 +168,10 @@ export async function authenticate(request, env) {
     .split(",")
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);
-  if (allowed.length === 0 || !allowed.includes(email)) return null;
+  // Wer rein darf, regelt die Access-Richtlinie bei Cloudflare. ALLOWED_EMAILS ist
+  // eine optionale zweite Liste (z. B. als Secret), leer = jede von Access geprüfte Person.
+  if (!email) return null;
+  if (allowed.length > 0 && !allowed.includes(email)) return null;
   return email;
 }
 
